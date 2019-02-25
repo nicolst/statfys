@@ -1,6 +1,6 @@
 import numpy as np
 
-
+# Generate the spin configurations recursively
 def generate_recursive(n):
     if n == 1:
         return [[1], [-1]]
@@ -14,8 +14,9 @@ def generate_recursive(n):
 
     return permutations
 
+# "Helper" function to avoid too much shitty numpy code
 def generate_sigma(n):
     arr = generate_recursive(n)
     return np.array(arr)
 
-print(generate_sigma(3))
+print(generate_sigma(5))

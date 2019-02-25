@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import threading
 
 
+# Threaded class for computing eigenvalues
 class Spinerino(threading.Thread):
     def __init__(self, P, beta):
         self.beta = beta
@@ -17,6 +18,7 @@ class Spinerino(threading.Thread):
         self.compute_eigenvalues()
 
 
+# Generate the P matrix (without the beta factor in the exponential)
 def generate_P(sigma, Bb, J):
     sigma_len = len(sigma)
     P = np.zeros((sigma_len, sigma_len))
@@ -34,7 +36,7 @@ def generate_P(sigma, Bb, J):
 betavals = np.linspace(0.005, 1.0, 100, endpoint=True)
 
 B, J = 0.5, (1.2, 1.2)
-n = 8
+n = 1
 
 sigma = permutations.generate_sigma(n)
 
@@ -52,4 +54,10 @@ for s in spinerinos:
 eigvals = [s.eigvalues for s in spinerinos]
 
 plt.semilogy(betavals, eigvals)
+
+plt.title(r"$n={0}, B={1}, J_\perp={2}, J_\| = {3}$".format(1, 0.5, 1.2, 1.2))
+
+plt.ylabel(r"$\log_{10} \lambda$", size=14)
+plt.xlabel(r"$\beta$", size=14)
+
 plt.show()
